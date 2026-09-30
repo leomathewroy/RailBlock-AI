@@ -1,0 +1,21 @@
+{
+  "model_name": "Indian Railways Train Delay Predictor",
+  "algorithm": "XGBoost Regressor",
+  "features": [
+    "scheduled_hour",
+    "day_of_week",
+    "month",
+    "distance_km",
+    "train_type_code",
+    "historical_avg_delay"
+  ],
+  "target": "delay_minutes",
+  "metrics": {
+    "mae": 3.52,
+    "rmse": 4.47,
+    "r2": 0.9024
+  },
+  "training_samples": 12000,
+  "test_samples": 3000,
+  "random_state": 42
+}

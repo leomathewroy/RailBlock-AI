@@ -1,0 +1,66 @@
+# Environment
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+venv/
+.venv/
+env/
+.Python
+
+# ML Models (large artifacts)
+ml_models/**/*.pkl
+ml_models/**/*.joblib
+ml_models/**/*.json
+!ml_models/**/metadata.json
+
+# Data (raw datasets must be downloaded separately)
+backend/data/raw/**/*.json
+backend/data/raw/**/*.csv
+backend/data/raw/**/*.xlsx
+backend/data/processed/
+backend/data/synthetic/
+
+# Node
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Docker
+*.log
+
+# Database
+*.db
+*.sqlite3
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Misc
+*.bak
+*.tmp
