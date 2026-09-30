@@ -26,13 +26,15 @@ class Settings(BaseSettings):
     DEMO_USERNAME: str = "Novaa_x"
     DEMO_PASSWORD: str = "RailBlock@2026"
 
-    # CORS
-    CORS_ORIGINS: Union[str, List[str]] = "http://localhost:5173,http://localhost:3000,http://127.0.0.1:5173"
+    # CORS - Allow Netlify and Localhost
+    CORS_ORIGINS: Union[str, List[str]] = "*"
 
     @field_validator("CORS_ORIGINS", mode="after")
     @classmethod
     def assemble_cors_origins(cls, v: Union[str, List[str]]) -> List[str]:
         if isinstance(v, str):
+            if v.strip() == "*":
+                return ["*"]
             return [i.strip() for i in v.split(",") if i.strip()]
         return v
 
