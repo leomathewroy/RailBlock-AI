@@ -10,14 +10,10 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy backend requirements explicitly and install dependencies unconditionally
-COPY backend/requirements.txt ./requirements.txt
+COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy backend application source code
-COPY backend/ ./backend/
-
-WORKDIR /app/backend
+COPY . ./
 
 EXPOSE 8000
 
