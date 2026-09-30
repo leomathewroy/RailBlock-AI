@@ -4,6 +4,7 @@ WORKDIR /app
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+ENV PATH="/usr/local/bin:${PATH}"
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends gcc libpq-dev \
@@ -20,4 +21,4 @@ RUN if [ -f "requirements.txt" ]; then \
 
 EXPOSE 8000
 
-CMD ["sh", "-c", "if [ -d 'backend/app' ]; then cd backend && uvicorn app.main:app --host 0.0.0.0 --port 8000; else uvicorn app.main:app --host 0.0.0.0 --port 8000; fi"]
+CMD ["sh", "-c", "if [ -d 'backend/app' ]; then cd backend && python -m uvicorn app.main:app --host 0.0.0.0 --port 8000; else python -m uvicorn app.main:app --host 0.0.0.0 --port 8000; fi"]
