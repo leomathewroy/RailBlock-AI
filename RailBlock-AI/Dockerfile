@@ -10,12 +10,13 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy entire build context unconditionally
+# Copy entire build context
 COPY . /app/
 
-# Find and install requirements.txt dynamically
-RUN find /app -name "requirements.txt" -exec pip install --no-cache-dir -r {} +
+# Iterate and install requirements files individually with -r
+RUN for f in $(find /app -name "requirements.txt"); do pip install --no-cache-dir -r "$f"; done
 
 EXPOSE 8000
 
-CMD ["sh", "-c", "if [ -f /app/app/main.py ]; then cd /app && python -m uvicorn app.main:app --host 0.0.0.0 --port 8000; else cd /app/backend && python -m uvicorn app.main:app --host 0.0.0.0 --port 8000; fi"]
+# Dynamically locate app/main.py directory and start uvicorn
+CMD ["sh", "-c", "MAIN=$(find /app -name main.py | head -n 1); APP_DIR=$(dirname $(dirname $MAIN)); cd $APP_DIR && python -m uvicorn app.main:app --host 0.0.0.0 --port 8000"]
